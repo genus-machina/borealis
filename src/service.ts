@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import {DeviceManager, NamedTime, OutputDevice, Scheduler, Time} from '@genus-machina/screech';
 import logger from './logger';
 

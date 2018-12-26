@@ -2,7 +2,7 @@
   "name": "@genus-machina/borealis",
   "version": "1.0.1",
   "description": "Smart monitor",
-  "main": "dist/service.js",
+  "bin": "./dist/service.js",
   "scripts": {
     "clean": "rm -rf dist",
     "compile": "tsc",
