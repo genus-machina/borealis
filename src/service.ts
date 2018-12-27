@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import {DeviceManager, NamedTime, OutputDevice, Scheduler, Time} from '@genus-machina/screech';
+import {DeviceManager, Lamp, NamedTime, Scheduler, Time} from '@genus-machina/screech';
 import logger from './logger';
 
 logger.info('setting up devices');
@@ -7,16 +7,14 @@ logger.info('setting up devices');
 const devices = new DeviceManager();
 
 devices.addDevice(
-  new OutputDevice({
-    activeLow: true,
+  new Lamp({
     name: 'northeast-lamp',
     port: 2
   })
 );
 
 devices.addDevice(
-  new OutputDevice({
-    activeLow: true,
+  new Lamp({
     name: 'southeast-lamp',
     port: 3
   })
