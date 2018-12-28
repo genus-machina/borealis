@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import {DeviceManager, Lamp, NamedTime, Scheduler, Time} from '@genus-machina/screech';
+import {DeviceManager, InputDevice, InputEvent, Lamp, NamedTime, Scheduler, Time} from '@genus-machina/screech';
 import logger from './logger';
 
 logger.info('setting up devices');
@@ -22,6 +22,42 @@ devices.addDevice(
 
 devices.createAlias('floods', 'northeast-lamp');
 devices.createAlias('floods', 'southeast-lamp');
+
+devices.addDevice(
+  new InputDevice({
+    name: 'northeast-sensor',
+    port: 14
+  })
+);
+
+devices.addDevice(
+  new InputDevice({
+    name: 'southeast-sensor',
+    port: 15
+  })
+);
+
+devices.on(
+  InputEvent.Activation,
+  function sensorActivation (device : InputDevice) {
+    const state = {
+      device,
+      event: InputEvent.Activation
+    };
+    logger.info(state, `${device.name} has activated`);
+  }
+);
+
+devices.on(
+  InputEvent.Deactivation,
+  function sensorDeactivation (device : InputDevice) {
+    const state = {
+      device,
+      event: InputEvent.Deactivation
+    };
+    logger.info(state, `${device.name} has deactivated`);
+  }
+);
 
 logger.info('setting up schedules');
 
