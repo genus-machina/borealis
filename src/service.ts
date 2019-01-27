@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import {DeviceManager, InputDevice, InputEvent, Lamp, NamedTime, Scheduler, Time} from '@genus-machina/screech';
+import assert from 'assert';
 import logger from './logger';
 
 logger.info('setting up devices');
@@ -63,10 +64,12 @@ logger.info('setting up schedules');
 
 const MAX_DELAY = 30 * 60 * 1000; // 30 minutes
 
-const schedule = new Scheduler({
-  latitude: parseFloat(process.env.LATITUDE!),
-  longitude: parseFloat(process.env.LONGITUDE!)
-});
+const latitude =  parseFloat(process.env.LATITUDE!);
+const longitude = parseFloat(process.env.LONGITUDE!);
+assert(isFinite(latitude), `Invalid latitude ${process.env.LATITUDE}`);
+assert(isFinite(longitude), `Invalid longitude ${process.env.LONGITUDE}`);
+
+const schedule = new Scheduler({latitude, longitude});
 
 schedule.everyDayAt(
   Time.parse('05:00'),
