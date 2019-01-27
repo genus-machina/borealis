@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import {DeviceManager, InputDevice, InputEvent, Lamp, NamedTime, Scheduler, Time} from '@genus-machina/screech';
 import assert from 'assert';
+import pick from 'lodash/pick';
 import logger from './logger';
 
 logger.info('setting up devices');
@@ -42,7 +43,7 @@ devices.on(
   InputEvent.Activation,
   function sensorActivation (device : InputDevice) {
     const state = {
-      device,
+      device: pick(device, 'id', 'name', 'port'),
       event: InputEvent.Activation
     };
     logger.info(state, `${device.name} has activated`);
@@ -53,7 +54,7 @@ devices.on(
   InputEvent.Deactivation,
   function sensorDeactivation (device : InputDevice) {
     const state = {
-      device,
+      device: pick(device, 'id', 'name', 'port'),
       event: InputEvent.Deactivation
     };
     logger.info(state, `${device.name} has deactivated`);
