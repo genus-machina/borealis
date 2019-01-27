@@ -1,6 +1,6 @@
 {
   "name": "@genus-machina/borealis",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Smart monitor",
   "bin": "./dist/service.js",
   "scripts": {
